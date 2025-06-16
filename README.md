@@ -8,7 +8,7 @@ For CUDA support, install PyTorch with CUDA using the official instructions: htt
 If you plan to use Jupyter Notebooks, you may also want to install `jupyter`:
 ```bash
 pip install jupyter
-
+```
 
 ## 📂 Repository Layout
 ```
