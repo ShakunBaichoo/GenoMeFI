@@ -9,7 +9,7 @@
 #SBATCH -N 1
 #SBATCH --output=logs/finetune_llm_%j.out
 #SBATCH --error=logs/finetune_llm_%j.err
-#SBATCH --mail-user=shakun.baichoo@gmail.com
+#SBATCH --mail-user=shakun.baichoo@gmail.com # please use your email
 #SBATCH --mail-type=ALL
 #SBATCH --export=ALL
 
