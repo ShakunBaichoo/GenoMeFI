@@ -1,0 +1,82 @@
+Job started on node43.h4h.uhnresearch.ca at Sat Jun 14 01:09:01 AM EDT 2025
+Wrote BED file: ./data/windows_200/windows_200.bed
+Extracting FASTA: ./data/windows_200/clinvar_windows_200.fa
+Saved: ./data/windows_200/clinvar_windows_200.fa
+
+Wrote BED file: ./data/windows_225/windows_225.bed
+Extracting FASTA: ./data/windows_225/clinvar_windows_225.fa
+Saved: ./data/windows_225/clinvar_windows_225.fa
+
+Wrote BED file: ./data/windows_300/windows_300.bed
+Extracting FASTA: ./data/windows_300/clinvar_windows_300.fa
+Saved: ./data/windows_300/clinvar_windows_300.fa
+
+Wrote BED file: ./data/windows_400/windows_400.bed
+Extracting FASTA: ./data/windows_400/clinvar_windows_400.fa
+Saved: ./data/windows_400/clinvar_windows_400.fa
+
+Wrote BED file: ./data/windows_450/windows_450.bed
+Extracting FASTA: ./data/windows_450/clinvar_windows_450.fa
+Saved: ./data/windows_450/clinvar_windows_450.fa
+
+Merged annotated CSV with sequences to ./data/windows_200/clinvar_windows_200_annotated.csv
+Merged annotated CSV with sequences to ./data/windows_225/clinvar_windows_225_annotated.csv
+Merged annotated CSV with sequences to ./data/windows_300/clinvar_windows_300_annotated.csv
+Merged annotated CSV with sequences to ./data/windows_400/clinvar_windows_400_annotated.csv
+Merged annotated CSV with sequences to ./data/windows_450/clinvar_windows_450_annotated.csv
+Cleaned data written to ./data/windows_200/clinvar_windows_200_cleaned.tsv
+Train class counts:
+ clinvar_binary
+pathogenic        15000
+non-pathogenic    15000
+Name: count, dtype: int64
+Test class counts:
+ clinvar_binary
+non-pathogenic    1500
+pathogenic        1500
+Name: count, dtype: int64
+Cleaned data written to ./data/windows_225/clinvar_windows_225_cleaned.tsv
+Train class counts:
+ clinvar_binary
+pathogenic        15000
+non-pathogenic    15000
+Name: count, dtype: int64
+Test class counts:
+ clinvar_binary
+non-pathogenic    1500
+pathogenic        1500
+Name: count, dtype: int64
+Cleaned data written to ./data/windows_300/clinvar_windows_300_cleaned.tsv
+Train class counts:
+ clinvar_binary
+pathogenic        15000
+non-pathogenic    15000
+Name: count, dtype: int64
+Test class counts:
+ clinvar_binary
+non-pathogenic    1500
+pathogenic        1500
+Name: count, dtype: int64
+Cleaned data written to ./data/windows_400/clinvar_windows_400_cleaned.tsv
+Train class counts:
+ clinvar_binary
+pathogenic        15000
+non-pathogenic    15000
+Name: count, dtype: int64
+Test class counts:
+ clinvar_binary
+non-pathogenic    1500
+pathogenic        1500
+Name: count, dtype: int64
+Cleaned data written to ./data/windows_450/clinvar_windows_450_cleaned.tsv
+Train class counts:
+ clinvar_binary
+pathogenic        15000
+non-pathogenic    15000
+Name: count, dtype: int64
+Test class counts:
+ clinvar_binary
+non-pathogenic    1500
+pathogenic        1500
+Name: count, dtype: int64
+Job ended at Sat Jun 14 01:30:12 AM EDT 2025

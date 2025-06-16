@@ -1,0 +1,36 @@
+Job started on node35.h4h.uhnresearch.ca at Sat Jun 14 01:40:04 AM EDT 2025
+============================================================
+Starting fine-tuning pipeline...
+  Model path   : /cluster/projects/bwanggroup/Shakun/tabularFM/hugging_face_models/DNABERT-6
+  Dataset path : data/windows_300/clinvar_binary_train_300.tsv
+  Output dir   : ./finetuned_models/dnabert6_pathogenic_classifier_300
+  Label column : is_pathogenic
+  Max sequence length: 1024
+  Batch size   : 3
+  Epochs       : 10
+  Learning rate: 2e-05
+  Multiclass   : False
+============================================================
+Using class weights: {0: 1.0, 1: 1.0}
+Epoch 1 | Train Loss: 0.7023 | Val Loss: 0.7042 | Val Acc: 0.5000
+Validation loss improved. Model saved to ./finetuned_models/dnabert6_pathogenic_classifier_300.
+Epoch 2 | Train Loss: 0.6993 | Val Loss: 0.7084 | Val Acc: 0.5000
+No improvement for 1 epoch(s).
+Epoch 3 | Train Loss: 0.7011 | Val Loss: 0.6937 | Val Acc: 0.5000
+Validation loss improved. Model saved to ./finetuned_models/dnabert6_pathogenic_classifier_300.
+Epoch 4 | Train Loss: 0.6990 | Val Loss: 0.6997 | Val Acc: 0.5000
+No improvement for 1 epoch(s).
+Epoch 5 | Train Loss: 0.6960 | Val Loss: 0.7008 | Val Acc: 0.5000
+No improvement for 2 epoch(s).
+Epoch 6 | Train Loss: 0.6957 | Val Loss: 0.6935 | Val Acc: 0.5000
+Validation loss improved. Model saved to ./finetuned_models/dnabert6_pathogenic_classifier_300.
+Epoch 7 | Train Loss: 0.6952 | Val Loss: 0.6937 | Val Acc: 0.5000
+No improvement for 1 epoch(s).
+Epoch 8 | Train Loss: 0.6945 | Val Loss: 0.6960 | Val Acc: 0.5000
+No improvement for 2 epoch(s).
+Epoch 9 | Train Loss: 0.6937 | Val Loss: 0.6932 | Val Acc: 0.5000
+Validation loss improved. Model saved to ./finetuned_models/dnabert6_pathogenic_classifier_300.
+Epoch 10 | Train Loss: 0.6937 | Val Loss: 0.6932 | Val Acc: 0.5000
+No improvement for 1 epoch(s).
+Training complete. Curves saved in the output directory.
+Job ended at Sat Jun 14 06:15:30 AM EDT 2025
