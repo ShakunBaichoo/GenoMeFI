@@ -1,6 +1,14 @@
 # GenoMeFI - Exploring mechanistic interpretability in genomic foundation models for genetic variant understanding
 This repository benchmarks and mechanistically interprets large language models (LLMs) for predicting ClinVar variant pathogenicity. We compare three backbones—Nucleotide Transformer (NT), DNABERT-6, and GROVER—and four downstream classifiers. NT + Logistic Regression achieved the best hold-out performance and is the focus of our interpretability pipeline (attention, activation‐patching, sparse autoencoder, and circuit ablation).
 
+## Requirements
+To run these experiments you need to clone this repository and install the required librarries. Refer to `requirements.txt` for core Python dependencies.
+For CUDA support, install PyTorch with CUDA using the official instructions: https://pytorch.org/get-started/locally/
+
+If you plan to use Jupyter Notebooks, you may also want to install `jupyter`:
+```bash
+pip install jupyter
+
 
 ## 📂 Repository Layout
 ```
