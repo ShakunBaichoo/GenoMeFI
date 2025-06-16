@@ -258,7 +258,7 @@ By integrating these four approaches—static attention maps, causal patch-and-r
 This project is licensed under the GNU General Public License v3.0.  
 See the full text at [https://www.gnu.org/licenses/gpl-3.0.en.html](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
-[License](./License.txt)
+[License](./LICENSE)
 ## Contact
 
 For questions or contributions, feel free to reach out to  
