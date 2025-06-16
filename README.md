@@ -12,6 +12,7 @@ This repository benchmarks and mechanistically interprets large language models 
 │   ├── dnabert6_pathogenic_classifier_225/
 │   ├── grover_pathogenic_classifier_225/
 │   └── nucleotide_transformer_pathogenic_classifier_225/
+├── hugging_face_models/
 ├── logs/
 ├── Ref38Genome/
 └── results/
