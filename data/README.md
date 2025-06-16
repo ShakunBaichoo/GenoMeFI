@@ -1,1 +1,2 @@
-This folder is supposed to contain the datasets.
+This folder will contain the processed Clinvar data, as per chosen windiw size up and downstream of each variant like 225bp or 300bp, whichever you specify when generating the data using the scripts [1_process_clinvar_data.py](../1_process_clinvar_data.py) and [Slurm_run_finetune_llms.sh](../Slurm_run_finetune_llms.sh).
+It will also contain the embeddings of the train and test data generated using the finetuned version of each of three LLMs (Nucleotide Transformer, DNABERT-6 and GRoVER) using the notebook [3_generate_embeddings.ipynb](../3_generate_embeddings.ipynb).
