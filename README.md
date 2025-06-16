@@ -54,7 +54,7 @@ A lightweight, end-to-end data-acquisition pipeline that:
 - Downloads ClinVar XML and VCF releases (plus their `.md5` checksums and VCF index) and the GRCh38 reference FASTA (with its checksum list) over HTTP, displaying a `tqdm` progress bar.  
 - Computes MD5 hashes (`md5sum`) and validates them against provided checksum files (`check_md5`), aborting if any mismatch is detected to prevent downstream errors.  
 - Organizes all files under `./data/clinvar_xml_data/`, `./data/clinvar_vcf/` and `./data/Ref38Genome/`.  
-- **Script:** `download_data.py`  
+- **Script:** [download_data.py](./download_data.py)  
 
 ## 2. Download Pretrained LLMs  
 A simple utility to fetch and cache genomic language model artifacts:  
