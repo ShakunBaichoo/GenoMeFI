@@ -41,26 +41,24 @@ A simple utility to fetch and cache genomic language model artifacts:
 
 ### 3. Process ClinVar Data
 This step transforms raw ClinVar releases and the GRCh38 reference into cleaned, balanced training and test sets:
-1. **Download sources**  
-   - **ClinVar XML** and **VCF** from NCBI (with `.md5` checksum files).  
-   - **GRCh38 FASTA** (plus its checksum list).
-
-2. **Parse and merge**  
+1. **Parse and merge**  
    - Extract variant metadata and trimmed coordinate tables from the XML (`extract_from_xml`).  
    - Extract clinical significance annotations from the VCF (`extract_clinsig_from_vcf`).  
    - Merge into a master table (`merge_trimmed_and_clinsig`).
+   - We need both files because the fasta seqeunces are identied using canonical positions which is stored in the xml file and the clinvar signatures are in the vcf file.
 
-3. **Filter & categorize**  
+2. **Filter & categorize**  
    - Remove ambiguous or conflicting assertions.  
-   - Re‐label into binary “Pathogenic/Likely Pathogenic” vs. “Benign/Likely Benign.”
+   - Retain only “Pathogenic/Likely Pathogenic” vs. “Benign/Likely Benign.”
+   - Re‐label into binary “Pathogenic” vs. “Non-Pathogenic”
 
-4. **Window & FASTA generation**  
+3. **Window & FASTA generation**  
    - Define sequence‐extraction windows (e.g. 200, 225, 300, 400, 450 bp).  
    - Create BED files and pull corresponding FASTA slices from GRCh38 (`create_windows_and_fasta`).  
    - Integrate with the variant table (`integrate_fasta_to_table`).  
    - Clean sequences to uppercase, restrict to A/C/G/T (`clean_sequences`).
 
-5. **Train/test split**  
+4. **Train/test split**  
    - Balance by class.  
    - Export final TSVs for downstream modeling (`create_binary_subsets`).
 
