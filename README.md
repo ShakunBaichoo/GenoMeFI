@@ -62,7 +62,7 @@ A simple utility to fetch and cache genomic language model artifacts:
 - Verifies that each file completes successfully before proceeding.  
 - Structures the output under `./hugging_face_models/{model_name}/`, ready for fine-tuning or inference.  
 - Skips existing files to minimize redundant transfers.  
-- **Script:** [download_data.py](./download_data.py)
+- **Script:** [download_LLMs.py](./download_LLMs.py)
 
 ## 3. Process ClinVar Data
 This step transforms raw ClinVar releases and the GRCh38 reference into cleaned, balanced training and test sets:
