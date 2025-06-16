@@ -17,6 +17,7 @@ echo "Job started on $(hostname) at $(date)"
 cd $SLURM_SUBMIT_DIR
 
 # Activate your conda environment
+# Mine is as follows:
 source ~/anaconda3/etc/profile.d/conda.sh
 conda activate dna_bert2
 
