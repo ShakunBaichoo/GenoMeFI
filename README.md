@@ -3,6 +3,7 @@ This repository benchmarks and mechanistically interprets large language models 
 
 
 ## 📂 Repository Layout
+```
 .
 ├── clinvar_vcf/
 ├── clinvar_xml_data/
@@ -19,7 +20,7 @@ This repository benchmarks and mechanistically interprets large language models 
     └── NT_225bp/
         └── mechanistic_interpretation/
             └── motif_fastas/
-
+```
 This folder also contains the code (Python scripts, Jupyter notebooks, and SLURM scripts) for running the full experiment, as follows:
 
 ### 1. Download ClinVar & Reference Data  
