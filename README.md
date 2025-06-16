@@ -63,8 +63,8 @@ This step transforms raw ClinVar releases and the GRCh38 reference into cleaned,
    - Balance by class.  
    - Export final TSVs for downstream modeling (`create_binary_subsets`).
 
-- **Script:** `1_process_clinvar_data.py`  
-- **SLURM job:** `Slurm_run_process_clinvar_data.sh`  
+- **Script:** [1_process_clinvar_data.py](./1_process_clinvar_data.py) 
+- **SLURM job:** [Slurm_run_process_clinvar_data.sh](./Slurm_run_process_clinvar_data.sh)  
 
 ## 4. Finetune LLMs on Clinvar
 We wrap all fine-tuning logic in a single **ClinVarClassificationPipeline** class, which handles data loading, stratified train/validation splitting, tokenization to a fixed max_len, model configuration (via Hugging Face AutoModelForSequenceClassification), optional class-weighted loss, and early-stopping.  At each epoch it tracks training/validation loss and accuracy, saves the best checkpoint when validation loss improves, and writes loss/accuracy curves to the output directory.
@@ -134,12 +134,12 @@ sbatch Slurm_run_finetune.sh \
   --stratified_split \
   --weighted_loss
 ```
-- **Script:** `2_finetune_llms.py`  
-- **SLURM job:** `Slurm_run_finetune_llms.sh`
+- **Script:** [2_finetune_llms.py](./2_finetune_llms.py)
+- **SLURM job:** [Slurm_run_finetune_llms.sh](./Slurm_run_finetune_llms.sh)
 
 ## 5. Generate Embeddings
 
-Before training downstream classifiers, we convert every variant sequence into a fixed-length vector (“embedding”) using the same fine-tuned LLMs. The `3_generate_embeddings.ipynb` notebook implements the `LLMEmbeddingGenerator` class, which:
+Before training downstream classifiers, we convert every variant sequence into a fixed-length vector (“embedding”) using the same fine-tuned LLMs. The [3_generate_embeddings.ipynb](./3_generate_embeddings.ipynb) notebook implements the `LLMEmbeddingGenerator` class, which:
 
 1. **Loads** a fine-tuned model (e.g. `./finetuned_models/nucleotide_transformer_pathogenic_classifier_225`).  
 2. **Reads** both the **training** TSV (`clinvar_binary_train_225.tsv`) and the **hold-out** test TSV (`clinvar_binary_test_225.tsv`).  
@@ -153,7 +153,7 @@ Before training downstream classifiers, we convert every variant sequence into a
 These embedding files are then fed into Logistic Regression, XGBoost, CatBoost, and LightGBM for classification, as well as into the mechanistic-interpretation pipeline (attention, patching, SAE, ablation).  
 
 ## 6. Train & Evaluate Downstream Classifiers
-The `4_generate_predictions-final.ipynb` notebook implements an `EmbeddingClassifier` class to reduce, train, and evaluate four standard ML models on the LLM embeddings:
+The [4_generate_predictions-final.ipynb](./4_generate_predictions-final.ipynb) notebook implements an `EmbeddingClassifier` class to reduce, train, and evaluate four standard ML models on the LLM embeddings:
 
 1. **PCA reduction**  
    - Reads the metadata TSV (e.g. `data/windows_225/clinvar_binary_train_225.tsv`) and the corresponding embedding CSV (e.g. `data/embeddings/clinvar_binary_train_embeddings_NT_225.csv`).  
@@ -204,7 +204,7 @@ The same code can be repeated for DNABERT-6 and GROVER.
 
 ## 7. Mechanistic Interpretation
 
-All mechanistic-interpretation analyses are orchestrated via the `MechanisticInterpretation` class in `5_mechanistic_interpretation.ipynb`. This class encapsulates four complementary methods to probe how the fine-tuned NT + LR model arrives at its pathogenicity calls:
+All mechanistic-interpretation analyses are orchestrated via the `MechanisticInterpretation` class in [5_mechanistic_interpretation.ipynb](./5_mechanistic_interpretation.ipynb). This class encapsulates four complementary methods to probe how the fine-tuned NT + LR model arrives at its pathogenicity calls:
 
 1. **Attention Visualization**  
    - For each of 20 held-out variants (10 correctly predicted, 10 miscalled), we extract the full attention tensors (`output_attentions=True`) across all 24 layers and  the model’s heads.  
