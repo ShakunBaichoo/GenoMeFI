@@ -67,6 +67,7 @@ This step transforms raw ClinVar releases and the GRCh38 reference into cleaned,
 - **SLURM job:** `Slurm_run_process_clinvar_data.sh`  
 
 ### 4. Finetune LLMs on Clinvar
+![ClinVar Processing Pipeline](docs/finetune_models.png)
 We wrap all fine-tuning logic in a single **ClinVarClassificationPipeline** class, which handles data loading, stratified train/validation splitting, tokenization to a fixed max_len, model configuration (via Hugging Face AutoModelForSequenceClassification), optional class-weighted loss, and early-stopping.  At each epoch it tracks training/validation loss and accuracy, saves the best checkpoint when validation loss improves, and writes loss/accuracy curves to the output directory.
 
 All three LLMs—Nucleotide Transformer, DNABERT-6, and GROVER—were fine-tuned on the balanced 30 000-variant training file (./data/windows_225/clinvar_binary_train_225.tsv), containing 15 000 pathogenic and 15 000 benign examples using a 225 bp upstream/downstream window.  Below are example SLURM commands:
