@@ -7,21 +7,21 @@ To run these experiments you need to clone this repository and install the requi
    ```bash
    git clone https://github.com/yourusername/your-repo.git
    cd your-repo
-2. 	Create a Conda environment
+2. 	Create a Conda environment <br>
 We recommend Python 3.8 or above. Here’s an example using an environment named dna_bert2 (feel free to choose your own name):
 ```
 conda create -n dna_bert2 python=3.8
 conda activate dna_bert2
 ```
-3.	Install core dependencies
+3.	Install core dependencies <br>
 All the main Python packages are listed in requirements.txt. Once your environment is active, run:
 ```
 pip install -r requirements.txt
 ```
-4.	(Optional) CUDA-enabled PyTorch
+4.	(Optional) CUDA-enabled PyTorch <br>
 If you have an NVIDIA GPU and want hardware acceleration, install PyTorch with CUDA support by following the official guide:
 https://pytorch.org/get-started/locally/
-5.	(Optional) Jupyter Notebooks
+5.	(Optional) Jupyter Notebooks <br>
 To run any of the included .ipynb notebooks, install Jupyter:
 ```bash
 pip install jupyter
