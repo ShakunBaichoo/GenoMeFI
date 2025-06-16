@@ -4,21 +4,21 @@ This repository benchmarks and mechanistically interprets large language models 
 
 ## 📂 Repository Layout
 .
-├── clinvar_vcf
-├── clinvar_xml_data
-├── data
-├── finetuned_models
-│   ├── dnabert6_pathogenic_classifier_225
-│   ├── grover_pathogenic_classifier_225
-│   └── nucleotide_transformer_pathogenic_classifier_225
-├── logs
-├── Ref38Genome
-└── results
-    ├── DNABERT6_225bp
-    ├── GROVER_225bp
-    └── NT_225bp
-        └── mechanistic_interpretation
-            └── motif_fastas
+├── clinvar_vcf/
+├── clinvar_xml_data/
+├── data/
+├── finetuned_models/
+│   ├── dnabert6_pathogenic_classifier_225/
+│   ├── grover_pathogenic_classifier_225/
+│   └── nucleotide_transformer_pathogenic_classifier_225/
+├── logs/
+├── Ref38Genome/
+└── results/
+    ├── DNABERT6_225bp/
+    ├── GROVER_225bp/
+    └── NT_225bp/
+        └── mechanistic_interpretation/
+            └── motif_fastas/
 
 This folder also contains the code (Python scripts, Jupyter notebooks, and SLURM scripts) for running the full experiment, as follows:
 
