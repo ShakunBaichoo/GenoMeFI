@@ -1,0 +1,14 @@
+# requirements.txt
+numpy
+pandas
+requests
+tqdm
+joblib
+scikit-learn
+xgboost
+catboost
+lightgbm
+torch
+transformers
+matplotlib
+
