@@ -2,10 +2,27 @@
 This repository benchmarks and mechanistically interprets large language models (LLMs) for predicting ClinVar variant pathogenicity. We compare three backbones—Nucleotide Transformer (NT), DNABERT-6, and GROVER—and four downstream classifiers. NT + Logistic Regression achieved the best hold-out performance and is the focus of our interpretability pipeline (attention, activation‐patching, sparse autoencoder, and circuit ablation).
 
 ## Requirements
-To run these experiments you need to clone this repository and install the required librarries. Refer to `requirements.txt` for core Python dependencies.
-For CUDA support, install PyTorch with CUDA using the official instructions: https://pytorch.org/get-started/locally/
-
-If you plan to use Jupyter Notebooks, you may also want to install `jupyter`:
+To run these experiments you need to clone this repository and install the required librarries. 
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/yourusername/your-repo.git
+   cd your-repo
+2. 	Create a Conda environment
+We recommend Python 3.8 or above. Here’s an example using an environment named dna_bert2 (feel free to choose your own name):
+```
+conda create -n dna_bert2 python=3.8
+conda activate dna_bert2
+```
+3.	Install core dependencies
+All the main Python packages are listed in requirements.txt. Once your environment is active, run:
+```
+pip install -r requirements.txt
+```
+4.	(Optional) CUDA-enabled PyTorch
+If you have an NVIDIA GPU and want hardware acceleration, install PyTorch with CUDA support by following the official guide:
+https://pytorch.org/get-started/locally/
+5.	(Optional) Jupyter Notebooks
+To run any of the included .ipynb notebooks, install Jupyter:
 ```bash
 pip install jupyter
 ```
