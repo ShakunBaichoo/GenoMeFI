@@ -41,6 +41,7 @@ A simple utility to fetch and cache genomic language model artifacts:
 
 ### 3. Process ClinVar Data
 This step transforms raw ClinVar releases and the GRCh38 reference into cleaned, balanced training and test sets:
+![ClinVar Processing Pipeline](docs/clinvar_processing_pipeline.png)
 1. **Parse and merge**  
    - Extract variant metadata and trimmed coordinate tables from the XML (`extract_from_xml`).  
    - Extract clinical significance annotations from the VCF (`extract_clinsig_from_vcf`).  
@@ -61,8 +62,6 @@ This step transforms raw ClinVar releases and the GRCh38 reference into cleaned,
 4. **Train/test split**  
    - Balance by class.  
    - Export final TSVs for downstream modeling (`create_binary_subsets`).
-
-![ClinVar Processing Pipeline](docs/clinvar_processing_pipeline.png)
 
 - **Script:** `1_process_clinvar_data.py`  
 - **SLURM job:** `Slurm_run_process_clinvar_data.sh`  
