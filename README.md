@@ -24,14 +24,14 @@ This repository benchmarks and mechanistically interprets large language models 
 ```
 This folder also contains the code (Python scripts, Jupyter notebooks, and SLURM scripts) for running the full experiment, as follows:
 
-### 1. Download ClinVar & Reference Data  
+## 1. Download ClinVar & Reference Data  
 A lightweight, end-to-end data-acquisition pipeline that:  
 - Downloads ClinVar XML and VCF releases (plus their `.md5` checksums and VCF index) and the GRCh38 reference FASTA (with its checksum list) over HTTP, displaying a `tqdm` progress bar.  
 - Computes MD5 hashes (`md5sum`) and validates them against provided checksum files (`check_md5`), aborting if any mismatch is detected to prevent downstream errors.  
 - Organizes all files under `./data/clinvar_xml_data/`, `./data/clinvar_vcf/` and `./data/Ref38Genome/`.  
 - **Script:** `download_data.py`  
 
-### 2. Download Pretrained LLMs  
+## 2. Download Pretrained LLMs  
 A simple utility to fetch and cache genomic language model artifacts:  
 - Pulls tokenizer and model weight files for Nucleotide Transformer, DNABERT-6, and GROVER from Hugging Face (or specified URLs), with support for resuming interrupted downloads.  
 - Verifies that each file completes successfully before proceeding.  
@@ -39,7 +39,7 @@ A simple utility to fetch and cache genomic language model artifacts:
 - Skips existing files to minimize redundant transfers.  
 - **Script:** `download_LLMs.py`
 
-### 3. Process ClinVar Data
+## 3. Process ClinVar Data
 This step transforms raw ClinVar releases and the GRCh38 reference into cleaned, balanced training and test sets:
 ![ClinVar Processing Pipeline](docs/clinvar_processing_pipeline.png)
 1. **Parse and merge**  
@@ -66,61 +66,63 @@ This step transforms raw ClinVar releases and the GRCh38 reference into cleaned,
 - **Script:** `1_process_clinvar_data.py`  
 - **SLURM job:** `Slurm_run_process_clinvar_data.sh`  
 
-### 4. Finetune LLMs on Clinvar
+## 4. Finetune LLMs on Clinvar
 We wrap all fine-tuning logic in a single **ClinVarClassificationPipeline** class, which handles data loading, stratified train/validation splitting, tokenization to a fixed max_len, model configuration (via Hugging Face AutoModelForSequenceClassification), optional class-weighted loss, and early-stopping.  At each epoch it tracks training/validation loss and accuracy, saves the best checkpoint when validation loss improves, and writes loss/accuracy curves to the output directory.
 
 All three LLMs—Nucleotide Transformer, DNABERT-6, and GROVER—were fine-tuned on the balanced 30 000-variant training file (./data/windows_225/clinvar_binary_train_225.tsv), containing 15 000 pathogenic and 15 000 benign examples using a 225 bp upstream/downstream window.  Below are example SLURM commands:
 
 #### Nucleotide Transformer (binary, 225 bp window, max_len=512)
 ```
-sbatch Slurm_run_finetune_llms.sh \
-  --model_path    ./hugging_face_models/nucleotide-transformer-500m-human-ref \
-  --data_path     ./data/windows_225/clinvar_binary_train_225.tsv            \
-  --label_column  is_pathogenic                                           \
-  --output_dir    ./finetuned_models/nt_classifier                         \
-  --max_len       512                                                      \
-  --batch_size    4                                                        \
-  --epochs        10                                                       \
-  --lr            2e-5                                                     \
-  --patience      5                                                        \
-  --stratified_split                                                     \
+sbatch Slurm_run_finetune_llms \
+  --model_path ./hugging_face_models/nucleotide-transformer-500m-human-ref \ 
+  --data_path ./data/windows_225/clinvar_binary_train_225.tsv \
+  --label_column is_pathogenic \
+  --output_dir ./finetuned_models/nucleotide_transformer_pathogenic_classifier_225 \
+  --max_len 512 \
+  --batch_size 4 \
+  --epochs 10 \
+  --lr 2e-5 \
+  --patience 5 \
+  --stratified_split \
   --weighted_loss
 ```
-#### DNABERT-6 (same settings, batch_size=5)
-```
-sbatch Slurm_run_finetune_llms.sh \
-  --model_path    ./hugging_face_models/DNABERT-6                        \
-  --data_path     ./data/windows_225/clinvar_binary_train_225.tsv        \
-  --label_column  is_pathogenic                                         \
-  --output_dir    ./finetuned_models/dnabert6_classifier_225            \
-  --max_len       512                                                    \
-  --batch_size    5                                                      \
-  --epochs        10                                                     \
-  --lr            2e-5                                                   \
-  --patience      5                                                      \
-  --stratified_split                                                   \
+
+#### DNABERT-6 (binary, 225bp, max_len=512) ======
+
+sbatch Slurm_run_finetune_llms \
+  --model_path ./hugging_face_models/DNABERT-6 \
+  --data_path ./data/windows_225/clinvar_binary_train_225.tsv \
+  --label_column is_pathogenic \
+  --output_dir ./finetuned_models/dnabert6_pathogenic_classifier_225 \
+  --max_len 512 \
+  --batch_size 5 \
+  --epochs 10 \
+  --lr 2e-5 \
+  --patience 5 \
+  --stratified_split \
   --weighted_loss
-```
+``
+
 #### GROVER (binary, 225 bp window, max_len=512)
 ```
-sbatch Slurm_run_finetune_llms.sh \
-  --model_path    ./hugging_face_models/GROVER_genomic                 \
-  --data_path     ./data/windows_225/clinvar_binary_train_225.tsv     \
-  --label_column  is_pathogenic                                      \
-  --output_dir    ./finetuned_models/grover_classifier_225           \
-  --max_len       512                                                 \
-  --batch_size    4                                                   \
-  --epochs        10                                                  \
-  --lr            2e-5                                                \
-  --patience      5                                                   \
-  --stratified_split                                              \
+sbatch Slurm_run_finetune_llms \
+  --model_path ./hugging_face_models/GROVER_genomic \
+  --data_path ./data/windows_225/clinvar_binary_train_225.tsv \
+  --label_column is_pathogenic \
+  --output_dir ./finetuned_models/grover_pathogenic_classifier_225 \
+  --max_len 512 \
+  --batch_size 4 \
+  --epochs 10 \
+  --lr 2e-5 \
+  --patience 5 \
+  --stratified_split \
   --weighted_loss
 ```
-###Note: the same pipeline also supports multi-class training (--multiclass) or other window sizes by adjusting --label_column, --max_len, and the input TSV, in case we wish to train on a multi-class. An example could be:
+#### Note: the same pipeline also supports multi-class training (--multiclass) or other window sizes by adjusting --label_column, --max_len, and the input TSV, in case we wish to train on a multi-class. An example could be:
 ```
 sbatch Slurm_run_finetune.sh \
-  --model_path ./hugging_face_models/nucleotide-transformer-500m-human-ref \
-  --data_path ./data/windows_225/clinvar_binary_train_225.tsv \
+  --model_path ./hugging_face_models/nucleotide-transformer-500m-human-ref \ 
+  --data_path data/windows_225/clinvar_binary_train_225.tsv \
   --label_column clinvar_group_label \
   --output_dir ./finetuned_models/nucleotide_transformer_pathogenic_classifier_225 \
   --max_len 512 \
@@ -128,14 +130,14 @@ sbatch Slurm_run_finetune.sh \
   --epochs 10 \
   --lr 2e-5 \
   --patience 5 \
-  --multiclass \
+   --multiclass \
   --stratified_split \
   --weighted_loss
 ```
 - **Script:** `2_finetune_llms.py`  
 - **SLURM job:** `Slurm_run_finetune_llms.sh`
 
-### 5. Generate Embeddings
+## 5. Generate Embeddings
 
 Before training downstream classifiers, we convert every variant sequence into a fixed-length vector (“embedding”) using the same fine-tuned LLMs. The `3_generate_embeddings.ipynb` notebook implements the `LLMEmbeddingGenerator` class, which:
 
@@ -150,7 +152,7 @@ Before training downstream classifiers, we convert every variant sequence into a
 
 These embedding files are then fed into Logistic Regression, XGBoost, CatBoost, and LightGBM for classification, as well as into the mechanistic-interpretation pipeline (attention, patching, SAE, ablation).  
 
-### 6. Train & Evaluate Downstream Classifiers
+## 6. Train & Evaluate Downstream Classifiers
 The `4_generate_predictions-final.ipynb` notebook implements an `EmbeddingClassifier` class to reduce, train, and evaluate four standard ML models on the LLM embeddings:
 
 1. **PCA reduction**  
