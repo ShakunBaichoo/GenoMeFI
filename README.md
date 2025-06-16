@@ -250,3 +250,26 @@ All mechanistic-interpretation analyses are orchestrated via the `MechanisticInt
    - This triangulates a small “circuit” of heads (L0:8,19,9; L7–L11: top heads) whose interruption yields the largest drop in P(pathogenic).
 
 By integrating these four approaches—static attention maps, causal patch-and-rewire, unsupervised latent-space discovery, and targeted head removal—we pinpoint a concise set of model components and sequence motifs that drive the NT + LR pathogenicity predictions.  
+
+---
+
+## License
+
+This project is licensed under the GNU General Public License v3.0.  
+See the full text at [https://www.gnu.org/licenses/gpl-3.0.en.html](https://www.gnu.org/licenses/gpl-3.0.en.html).
+
+> **GNU GENERAL PUBLIC LICENSE**  
+> Version 3, 29 June 2007  
+> 
+> Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>  
+> Everyone is permitted to copy and distribute verbatim copies  
+> of this license document, but changing it is not allowed.  
+> 
+> *Preamble*  
+> The GNU General Public License is a free, copyleft license for  
+> software and other kinds of works. …
+
+## Contact
+
+For questions or contributions, feel free to reach out to  
+**Shakun Baichoo** at <shakun.baichoo@gmail.com>.
