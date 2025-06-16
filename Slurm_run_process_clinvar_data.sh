@@ -18,6 +18,7 @@ module load samtools
 module load bedtools
 
 # Activate your conda environment
+# Mine is as follows:
 source ~/anaconda3/etc/profile.d/conda.sh
 conda activate dna_bert2
 
