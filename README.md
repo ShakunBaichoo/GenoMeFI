@@ -67,13 +67,12 @@ This step transforms raw ClinVar releases and the GRCh38 reference into cleaned,
 - **SLURM job:** `Slurm_run_process_clinvar_data.sh`  
 
 ### 4. Finetune LLMs on Clinvar
-![ClinVar Processing Pipeline](docs/finetune_models.png)
-
 We wrap all fine-tuning logic in a single **ClinVarClassificationPipeline** class, which handles data loading, stratified train/validation splitting, tokenization to a fixed max_len, model configuration (via Hugging Face AutoModelForSequenceClassification), optional class-weighted loss, and early-stopping.  At each epoch it tracks training/validation loss and accuracy, saves the best checkpoint when validation loss improves, and writes loss/accuracy curves to the output directory.
 
 All three LLMs—Nucleotide Transformer, DNABERT-6, and GROVER—were fine-tuned on the balanced 30 000-variant training file (./data/windows_225/clinvar_binary_train_225.tsv), containing 15 000 pathogenic and 15 000 benign examples using a 225 bp upstream/downstream window.  Below are example SLURM commands:
 
-# Nucleotide Transformer (binary, 225 bp window, max_len=512)
+#### Nucleotide Transformer (binary, 225 bp window, max_len=512)
+```
 sbatch Slurm_run_finetune_llms.sh \
   --model_path    ./hugging_face_models/nucleotide-transformer-500m-human-ref \
   --data_path     ./data/windows_225/clinvar_binary_train_225.tsv            \
@@ -86,8 +85,9 @@ sbatch Slurm_run_finetune_llms.sh \
   --patience      5                                                        \
   --stratified_split                                                     \
   --weighted_loss
-
-# DNABERT-6 (same settings, batch_size=5)
+```
+#### DNABERT-6 (same settings, batch_size=5)
+```
 sbatch Slurm_run_finetune_llms.sh \
   --model_path    ./hugging_face_models/DNABERT-6                        \
   --data_path     ./data/windows_225/clinvar_binary_train_225.tsv        \
@@ -100,8 +100,9 @@ sbatch Slurm_run_finetune_llms.sh \
   --patience      5                                                      \
   --stratified_split                                                   \
   --weighted_loss
-
-# GROVER (binary, 225 bp window, max_len=512)
+```
+#### GROVER (binary, 225 bp window, max_len=512)
+```
 sbatch Slurm_run_finetune_llms.sh \
   --model_path    ./hugging_face_models/GROVER_genomic                 \
   --data_path     ./data/windows_225/clinvar_binary_train_225.tsv     \
@@ -114,8 +115,9 @@ sbatch Slurm_run_finetune_llms.sh \
   --patience      5                                                   \
   --stratified_split                                              \
   --weighted_loss
-
-Note: the same pipeline also supports multi-class training (--multiclass) or other window sizes by adjusting --label_column, --max_len, and the input TSV, in case we wish to train on a multi-class. An example could be:
+```
+###Note: the same pipeline also supports multi-class training (--multiclass) or other window sizes by adjusting --label_column, --max_len, and the input TSV, in case we wish to train on a multi-class. An example could be:
+```
 sbatch Slurm_run_finetune.sh \
   --model_path ./hugging_face_models/nucleotide-transformer-500m-human-ref \
   --data_path ./data/windows_225/clinvar_binary_train_225.tsv \
@@ -129,7 +131,7 @@ sbatch Slurm_run_finetune.sh \
   --multiclass \
   --stratified_split \
   --weighted_loss
-
+```
 - **Script:** `2_finetune_llms.py`  
 - **SLURM job:** `Slurm_run_finetune_llms.sh`
 
