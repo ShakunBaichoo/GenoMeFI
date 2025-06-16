@@ -1,0 +1,33 @@
+Job started on node99.h4h.uhnresearch.ca at Sat Jun 14 01:40:04 AM EDT 2025
+============================================================
+Starting fine-tuning pipeline...
+  Model path   : /cluster/projects/bwanggroup/Shakun/tabularFM/hugging_face_models/GROVER_genomic
+  Dataset path : data/windows_225/clinvar_binary_train_225.tsv
+  Output dir   : ./finetuned_models/grover_pathogenic_classifier_225
+  Label column : is_pathogenic
+  Max sequence length: 512
+  Batch size   : 4
+  Epochs       : 10
+  Learning rate: 2e-05
+  Multiclass   : False
+============================================================
+Using class weights: {0: 1.0, 1: 1.0}
+Epoch 1 | Train Loss: 0.6999 | Val Loss: 0.6966 | Val Acc: 0.5000
+Validation loss improved. Model saved to ./finetuned_models/grover_pathogenic_classifier_225.
+Epoch 2 | Train Loss: 0.6956 | Val Loss: 0.6881 | Val Acc: 0.5310
+Validation loss improved. Model saved to ./finetuned_models/grover_pathogenic_classifier_225.
+Epoch 3 | Train Loss: 0.6700 | Val Loss: 0.6786 | Val Acc: 0.5600
+Validation loss improved. Model saved to ./finetuned_models/grover_pathogenic_classifier_225.
+Epoch 4 | Train Loss: 0.5896 | Val Loss: 0.7214 | Val Acc: 0.5743
+No improvement for 1 epoch(s).
+Epoch 5 | Train Loss: 0.3953 | Val Loss: 0.8955 | Val Acc: 0.5713
+No improvement for 2 epoch(s).
+Epoch 6 | Train Loss: 0.2123 | Val Loss: 1.1757 | Val Acc: 0.5812
+No improvement for 3 epoch(s).
+Epoch 7 | Train Loss: 0.1222 | Val Loss: 1.5808 | Val Acc: 0.5723
+No improvement for 4 epoch(s).
+Epoch 8 | Train Loss: 0.0841 | Val Loss: 1.6090 | Val Acc: 0.5833
+No improvement for 5 epoch(s).
+Early stopping triggered at epoch 8. Best epoch was 3.
+Training complete. Curves saved in the output directory.
+Job ended at Sat Jun 14 03:37:30 AM EDT 2025
