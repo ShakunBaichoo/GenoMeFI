@@ -33,6 +33,9 @@ pip install jupyter
 ├── clinvar_vcf/
 ├── clinvar_xml_data/
 ├── data/
+│   ├── embeddings/
+│   ├── windows_225
+│   ├── windows_300
 ├── finetuned_models/
 │   ├── dnabert6_pathogenic_classifier_225/
 │   ├── grover_pathogenic_classifier_225/
