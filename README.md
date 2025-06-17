@@ -116,7 +116,7 @@ sbatch Slurm_run_finetune_llms \
 ```
 
 #### DNABERT-6 (binary, 225bp, max_len=512) ======
-
+```
 sbatch Slurm_run_finetune_llms \
   --model_path ./hugging_face_models/DNABERT-6 \
   --data_path ./data/windows_225/clinvar_binary_train_225.tsv \
@@ -129,7 +129,7 @@ sbatch Slurm_run_finetune_llms \
   --patience 5 \
   --stratified_split \
   --weighted_loss
-``
+```
 
 #### GROVER (binary, 225 bp window, max_len=512)
 ```
@@ -164,6 +164,8 @@ sbatch Slurm_run_finetune.sh \
 ```
 - **Script:** [2_finetune_llms.py](./2_finetune_llms.py)
 - **SLURM job:** [Slurm_run_finetune_llms.sh](./Slurm_run_finetune_llms.sh)
+
+<b>Note:</b> For DNABERT-6, after it has finetuned, we have to manually add the line "model_type":"bert", immediately after "model_path" and before "architectures". This is because DNABERT-6 isn’t one of the “built-in” Hugging Face model types, so when we call AutoModelForSequenceClassification.from_pretrained() it looks at the "model_type" field in config.json to know which class to instantiate (e.g. "bert" → BertForSequenceClassification). The DNABERT repo ships a custom architecture but doesn’t include that key by default, so we must insert this line.
 
 ## 5. Generate Embeddings
 
