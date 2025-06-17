@@ -68,7 +68,7 @@ A simple utility to fetch and cache genomic language model artifacts:
 - **Script:** [download_LLMs.py](./download_LLMs.py)
 
 ## 3. Process ClinVar Data
-This step transforms raw ClinVar releases and the GRCh38 reference into cleaned, balanced training and test sets:
+This step transforms raw ClinVar releases and the GRCh38 reference into cleaned, balanced training and test sets, as shown in the workflow diagram:
 ![ClinVar Processing Pipeline](docs/clinvar_processing_pipeline.png)
 1. **Parse and merge**  
    - Extract variant metadata and trimmed coordinate tables from the XML (`extract_from_xml`).  
